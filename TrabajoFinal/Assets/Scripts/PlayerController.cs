@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,9 +22,6 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        moveInput = Input.GetAxis("Vertical");
-        rotationInput = Input.GetAxis("Horizontal");
-
         RotationWeels(moveInput, rotationInput);
     }
     void FixedUpdate()
@@ -61,5 +59,13 @@ public class PlayerController : MonoBehaviour
                 rightWheels[i].transform.Rotate(wheelRotation + rotationInput * wheelRotationSpeed * Time.deltaTime, 0.0f, 0.0f);
             }
        }
+    }
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<float>();
+    }
+    public void Rotation(InputAction.CallbackContext context)
+    {
+        rotationInput = context.ReadValue<float>();
     }
 }
