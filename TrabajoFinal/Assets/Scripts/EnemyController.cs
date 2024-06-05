@@ -41,6 +41,13 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            TakeDamage(1);
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == ("Player"))
@@ -48,10 +55,7 @@ public class EnemyController : MonoBehaviour
             player = other.transform;
             isPlayerRange = true;
         }
-        if (other.gameObject.tag == "Bullet")
-        {
-            TakeDamage(1);
-        }
+
     }
 
     void OnTriggerExit(Collider other)

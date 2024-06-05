@@ -46,8 +46,5 @@ public class GameManager : MonoBehaviour
         Debug.Log("El juego ha terminado.");
     }
 
-    public void ChangeScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+
 }

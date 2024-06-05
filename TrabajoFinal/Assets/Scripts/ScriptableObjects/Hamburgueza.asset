@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c3dcc9382958949ae484c8848adbaa, type: 3}
   m_Name: Hamburgueza
   m_EditorClassIdentifier: 
-  health: 10
+  health: 3
   speed: 4
   damage: 2.17
   detectionRange: 8

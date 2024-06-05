@@ -6,8 +6,16 @@ public class ShootPlayerController : MonoBehaviour
 {
     public float launchSpeed = 80.0f;
     public GameObject bullet;
-    
- 
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+
+    private void Start()
+    {
+        if(audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
     void Update()
     {
         if(Input.GetKeyDown("space"))
@@ -26,6 +34,11 @@ public class ShootPlayerController : MonoBehaviour
         GameObject Bullet = Instantiate(bullet, spawnPosition, spawnRotation);
         Rigidbody rigidbody = Bullet.GetComponent<Rigidbody>();
         rigidbody.velocity = velocity; 
+        if(audioSource != null && shootSound != null) 
+        {
+
+            audioSource.PlayOneShot(shootSound);        
+        }
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _compRigidbody;
@@ -67,5 +67,12 @@ public class PlayerController : MonoBehaviour
     public void Rotation(InputAction.CallbackContext context)
     {
         rotationInput = context.ReadValue<float>();
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Mina")
+        {
+            SceneManager.LoadScene("Derrota");
+        }
     }
 }
