@@ -1,44 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class EnemyController : MonoBehaviour
 {
-      public Enemys enemyDate;
+    public Enemys enemyData; 
     public Transform player;
-    private float currentHealh;
-    private bool isPlayerRange;
+    private float currentHealth;
+    private bool isPlayerInRange;
 
     void Start()
     {
-        currentHealh = enemyDate.health;
-
+        currentHealth = enemyData.health; 
     }
-    private void Update()
+
+    void Update()
     {
-        if(isPlayerRange && player != null)
+        if (isPlayerInRange && player != null)
         {
-            ChasePlayer();
+            ChasePlayer(); 
         }
     }
+
     void ChasePlayer()
     {
-        Vector3 director = (player.position - transform.position).normalized;
-        transform.position += director * enemyDate.speed * Time.deltaTime;
-
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.position += direction * enemyData.speed * Time.deltaTime; 
     }
+
     public void TakeDamage(float damage)
     {
-        currentHealh = currentHealh - damage;
-        if (currentHealh <= 0)
+        currentHealth -= damage;
+        if (currentHealth <= 0)
         {
-            Die();
+            Die(); 
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        
+        transform.DOScale(new Vector3(2f, 2f, 2f), 0.2f).OnComplete(Explode);
+    }
+
+    void Explode()
+    {
+       
+        transform.DOScale(Vector3.zero, 0.1f).OnComplete(DestroySelf);
+    }
+
+    void DestroySelf()
+    {
+        Destroy(gameObject); 
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,21 +61,21 @@ public class EnemyController : MonoBehaviour
             TakeDamage(1);
         }
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == ("Player"))
+        if (other.CompareTag("Player"))
         {
             player = other.transform;
-            isPlayerRange = true;
+            isPlayerInRange = true; 
         }
-
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == ("Player"))
+        if (other.CompareTag("Player"))
         {
-            isPlayerRange = false;
+            isPlayerInRange = false; 
         }
     }
 }
