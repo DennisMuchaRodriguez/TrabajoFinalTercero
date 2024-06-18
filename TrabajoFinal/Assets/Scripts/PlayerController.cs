@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 120.0f;
     public GameObject[] leftWheels;
     public GameObject[] rightWheels;
-
+    public float Life;
     public float wheelRotationSpeed = 200.0f;
     private float moveInput;
     private float rotationInput;
@@ -68,11 +68,11 @@ public class PlayerController : MonoBehaviour
     {
         rotationInput = context.ReadValue<float>();
     }
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Mina")
         {
             SceneManager.LoadScene("Derrota");
         }
-    }
+    }*/
 }

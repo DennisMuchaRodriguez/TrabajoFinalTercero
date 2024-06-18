@@ -6,24 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public static GameManager Instance
-    {
-        get 
-        {
-            if (instance == null)
-            {
-                instance = FindAnyObjectByType<GameManager>();
-            
-            }
-
-            return instance; 
-        }
-        private set
-        {
-            instance = value;
-        }
-
-    }
+    public DoubleCircularList<PlayerSelect> personajes;
+    public static GameManager Instance;
+  
     private void Awake()
     {
         if(instance != null && instance != this)
