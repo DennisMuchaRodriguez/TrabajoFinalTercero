@@ -7,5 +7,5 @@ public class PlayerSelect : ScriptableObject
 {
     public GameObject Player;
     public GameObject PersonajeJugable;
-    public TextMesh Txt;
+    public string Name;
 }

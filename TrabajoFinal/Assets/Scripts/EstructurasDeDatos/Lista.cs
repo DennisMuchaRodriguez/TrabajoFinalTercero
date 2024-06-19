@@ -22,7 +22,7 @@ public class Lista<T>
             ResizeArray();
         }
         array[length] = item;
-        length = length + 1;
+        length++;
     }
 
     public T Get(int index)

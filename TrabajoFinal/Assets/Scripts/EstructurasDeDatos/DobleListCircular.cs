@@ -19,7 +19,7 @@ public class DoubleCircularList<T>
     }
 
     private Node head;
-    private int count;
+    public int count;
 
     public void InsertNodeAtStart(T value)
     {

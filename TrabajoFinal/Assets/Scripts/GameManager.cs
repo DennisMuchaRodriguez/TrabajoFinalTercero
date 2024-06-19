@@ -5,13 +5,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public DoubleCircularList<PlayerSelect> personajes;
     public static GameManager Instance;
-  
+    public DoubleCircularList<PlayerSelect> personajes = new DoubleCircularList<PlayerSelect>(); 
+    public PlayerSelect Player1;
+    public PlayerSelect Player2;
+    public PlayerSelect Player3;
+
     private void Awake()
     {
-        if(instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -20,6 +22,17 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+      
+        personajes.InsertNodeAtStart(Player1);
+        personajes.InsertNodeAtStart(Player2);
+        personajes.InsertNodeAtStart(Player3);
+    }
+
+ 
+    public PlayerSelect GetCharacterByIndex(int index)
+    {
+        return personajes.GetNodeAtPosition(index);
     }
     public void StartGame()
     {

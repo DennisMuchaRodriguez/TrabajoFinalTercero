@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 5807792221145610603}
   - component: {fileID: 5524522439322804269}
   m_Layer: 0
-  m_Name: TankFree_Blue
+  m_Name: TanqueNaranja
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
