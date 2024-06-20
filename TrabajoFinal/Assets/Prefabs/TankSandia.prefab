@@ -902,10 +902,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4901064550239851604}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 093d89c0b8dbebb4ba2fc76376eaec74,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4090741221316252053}
   m_SourcePrefab: {fileID: 100100000, guid: 093d89c0b8dbebb4ba2fc76376eaec74, type: 3}
 --- !u!1 &2337699156362796813 stripped
 GameObject:
@@ -963,7 +959,7 @@ MonoBehaviour:
     m_ActionName: Player/Rotation[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4090741221316252053}
+      - m_Target: {fileID: 6468968957000068852}
         m_TargetAssemblyTypeName: SpenController, Assembly-CSharp
         m_MethodName: OnRotate
         m_Mode: 0
@@ -982,20 +978,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4090741221316252053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2337699156362796813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 368de2acec4df4b4590d5603a3ef6181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinSpeed: 90
-  Direction: 0
 --- !u!4 &3115079528444872119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 093d89c0b8dbebb4ba2fc76376eaec74,
