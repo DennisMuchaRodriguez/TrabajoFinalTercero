@@ -6,7 +6,7 @@ public class MenuAnimationController : MonoBehaviour
 {
     public RectTransform title;
     public Button[] menuButtons;
-    public Transform movingObject;
+    public Transform [] movingObject;
 
     public float fallDistance = 500f;
     public float fallDuration = 1f;
@@ -36,7 +36,16 @@ public class MenuAnimationController : MonoBehaviour
 
     void MoveObjectForward()
     {
-        Vector3 localMove = movingObject.TransformDirection(Vector3.forward) * moveDistanceZ;
-        movingObject.DOMove(movingObject.position + localMove, moveDurationZ).SetEase(Ease.OutQuad);
+        for (int i = 0; i < movingObject.Length; i++)
+        {
+            Transform obj = movingObject[i];
+            if (obj != null)
+            {
+                Vector3 localMove = obj.TransformDirection(Vector3.forward) * moveDistanceZ;
+                obj.DOMove(obj.position + localMove, moveDurationZ).SetEase(Ease.OutQuad);
+            }
+
+        }
+        
     }
 }

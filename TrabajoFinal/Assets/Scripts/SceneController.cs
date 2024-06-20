@@ -5,26 +5,45 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    public CinemachineFreeLook cinemachineFreeLook;
-    public PlayerController player;
+    public CinemachineFreeLook initialCamera; 
+    public CinemachineFreeLook followCamera;  
+    private PlayerController player;
 
     private void Start()
     {
-        player = FindAnyObjectByType<PlayerController>();
+     
+        if (initialCamera != null) initialCamera.Priority = 10;
+        if (followCamera != null) followCamera.Priority = 5;
 
-        if (player != null && cinemachineFreeLook != null)
+       
+        StartCoroutine(FindPlayerAndSwitchCamera());
+    }
+
+    private IEnumerator FindPlayerAndSwitchCamera()
+    {
+        
+        while (player == null)
         {
-            Transform followTransform = player.transform;
-            Transform lookAtTransform = player.transform;
+            player = FindAnyObjectByType<PlayerController>();
+            yield return new WaitForSeconds(0.5f);
+        }
 
-            cinemachineFreeLook.m_LookAt = lookAtTransform;
-            cinemachineFreeLook.m_Follow = followTransform;
+    
+        if (player != null && followCamera != null)
+        {
+            followCamera.m_LookAt = player.transform;
+            followCamera.m_Follow = player.transform;
+
+      
+            followCamera.Priority = 11; 
+            initialCamera.Priority = 5;
         }
         else
         {
-            Debug.LogError("No se encontró el objeto jugador con la etiqueta 'Player' o Cinemachine FreeLook no está asignado.");
+            Debug.LogError("No se encontró el objeto jugador o las cámaras no están asignadas.");
         }
     }
+
 
 
 }

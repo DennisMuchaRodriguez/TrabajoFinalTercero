@@ -1,22 +1,22 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatroller : MonoBehaviour
 {
-    public Enemys enemyData; 
+    public Enemys enemyData;
     public Lista<GameObject> pathNodes;
     private GameObject objective;
     private int currentIndex = 0;
-    private Rigidbody rb;
-    private GameObject player;
+    private Rigidbody _compRigidbody;
+    [SerializeField]private PlayerController player;
     private bool isChasing = false;
-    private Vector3 velocity = Vector3.zero;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        _compRigidbody = GetComponent<Rigidbody>();
+        player = FindAnyObjectByType<PlayerController>();
 
         if (player == null)
         {
@@ -28,7 +28,6 @@ public class EnemyPatroller : MonoBehaviour
         {
             objective = pathNodes.Get(currentIndex);
         }
-
     }
 
     void Update()
@@ -61,8 +60,12 @@ public class EnemyPatroller : MonoBehaviour
     {
         if (objective != null)
         {
+           
             Vector3 direction = (objective.transform.position - transform.position).normalized;
-            rb.velocity = direction * enemyData.speed;
+            _compRigidbody.velocity = direction * enemyData.speed;
+
+            
+            RotateTowards(direction);
 
             if (Vector3.Distance(transform.position, objective.transform.position) < 0.1f)
             {
@@ -76,8 +79,12 @@ public class EnemyPatroller : MonoBehaviour
     {
         if (player != null)
         {
+            
             Vector3 direction = (player.transform.position - transform.position).normalized;
-            rb.velocity = direction * enemyData.speed;
+            _compRigidbody.velocity = direction * enemyData.speed;
+
+          
+            RotateTowards(direction);
 
             if (Vector3.Distance(transform.position, player.transform.position) > enemyData.detectionRange)
             {
@@ -87,6 +94,29 @@ public class EnemyPatroller : MonoBehaviour
         }
     }
 
+    void Die()
+    {
+
+        transform.DOScale(new Vector3(2f, 2f, 2f), 0.2f).OnComplete(Explode);
+    }
+
+    void Explode()
+    {
+
+        transform.DOScale(Vector3.zero, 0.1f).OnComplete(DestroySelf);
+    }
+    void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+    public void TakeDamage(float damage)
+    {
+        enemyData.health -= damage;
+        if (enemyData.health <= 0)
+        {
+            Die();
+        }
+    }
     void CheckPlayerInRange()
     {
         if (player != null && Vector3.Distance(transform.position, player.transform.position) <= enemyData.detectionRange)
@@ -95,17 +125,34 @@ public class EnemyPatroller : MonoBehaviour
         }
     }
 
+    private void RotateTowards(Vector3 direction)
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemyData.speed);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            TakeDamage(1);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            player.Life = player.Life - enemyData.damage;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.tag == ("Player"))
         {
             isChasing = true;
         }
+
     }
 
     private void OnDrawGizmos()
     {
-        
+       
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemyData.detectionRange);
     }

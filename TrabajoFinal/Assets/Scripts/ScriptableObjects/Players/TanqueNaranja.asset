@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd8e4fe441983c43bd577c723c2f48e, type: 3}
   m_Name: TanqueNaranja
   m_EditorClassIdentifier: 
-  Player: {fileID: 2426040051304040683, guid: 5412fd2b9817a034694905ad7368d643, type: 3}
-  PersonajeJugable: {fileID: 6550043143502895823, guid: f0e9676e02f52bb479c73aad76707328,
+  Player: {fileID: 3588166899579643580, guid: 1573395473b70ce4db912b75b998fd2f, type: 3}
+  PersonajeJugable: {fileID: 8132743717023459765, guid: f6766d9062e37054084c99b103c2322f,
     type: 3}
   Name: Naranjado

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd8e4fe441983c43bd577c723c2f48e, type: 3}
   m_Name: TanqueSandia
   m_EditorClassIdentifier: 
-  Player: {fileID: 5877150032357493199, guid: 7745fe51c92a05544ac6dd279ce5c709, type: 3}
-  PersonajeJugable: {fileID: 5877150032357493199, guid: 7745fe51c92a05544ac6dd279ce5c709,
+  Player: {fileID: 617408399542780461, guid: 83c2c07d822e8d54b9f73c898b08ab23, type: 3}
+  PersonajeJugable: {fileID: 7666422195957828770, guid: aa080d2d63cd92e4cb93829c07308d88,
     type: 3}
   Name: SandiDandi

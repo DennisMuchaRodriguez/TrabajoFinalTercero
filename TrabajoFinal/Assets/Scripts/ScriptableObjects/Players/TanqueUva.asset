@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd8e4fe441983c43bd577c723c2f48e, type: 3}
   m_Name: TanqueUva
   m_EditorClassIdentifier: 
-  Player: {fileID: 2539219361167910130, guid: edf87cae71f903b43931d14a9e7fd7ed, type: 3}
-  PersonajeJugable: {fileID: 2539219361167910130, guid: edf87cae71f903b43931d14a9e7fd7ed,
+  Player: {fileID: 6198516186759689418, guid: c009ecfd55b184f4bba0372d157003ff, type: 3}
+  PersonajeJugable: {fileID: 8258002995930377318, guid: 73406a621e077bb4aad6426056c364d9,
     type: 3}
   Name: Uve

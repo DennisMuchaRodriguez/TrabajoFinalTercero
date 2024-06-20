@@ -68,11 +68,12 @@ public class PlayerController : MonoBehaviour
     {
         rotationInput = context.ReadValue<float>();
     }
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Mina")
+        if (collision.gameObject.tag == "EnemyBullet")
         {
-            SceneManager.LoadScene("Derrota");
+            Life = Life - 1;
         }
-    }*/
+      
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private PlayerController Player;
     public Enemys enemyData; 
     public Transform player;
     private float currentHealth;
@@ -13,6 +14,7 @@ public class EnemyController : MonoBehaviour
     {
 
         currentHealth = enemyData.health; 
+         Player = FindAnyObjectByType<PlayerController>();
     }
 
     void Update()
@@ -68,6 +70,10 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             TakeDamage(1);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            Player.Life = Player.Life - enemyData.damage;
         }
     }
 
