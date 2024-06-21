@@ -436,7 +436,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &5046044417622005997
 MonoBehaviour:
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c6bfafa28713242aa3fa6e23acacf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 13
   rotationSpeed: 130
   leftWheels:
   - {fileID: 9036822284646937366}
@@ -458,8 +458,12 @@ MonoBehaviour:
   rightWheels:
   - {fileID: 6953409316950640580}
   - {fileID: 852990886664705591}
-  Life: 0
+  Life: 3
   wheelRotationSpeed: 350
+  explosionPrefab: {fileID: 2572553842468110681, guid: 1f1d9024429a2aa42ba0fd6d34a18c2c,
+    type: 3}
+  gameOverScene: Derrota
+  delayBeforeSceneChange: 2
 --- !u!114 &8868524572840774300
 MonoBehaviour:
   m_ObjectHideFlags: 0
