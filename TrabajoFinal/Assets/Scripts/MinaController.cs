@@ -8,25 +8,19 @@ public class MinaController : MonoBehaviour
     [SerializeField] private PlayerController Player;
     public Minas minaData;
     private float Damage;
-
-  
-    public static Action<PlayerController> PlayerInstantiated;
-
+    public GameObject explosionPrefab;
+    public float explosionDuration = 3;
     private void Start()
     {
         Damage = minaData.damage;
-
-       
-        PlayerInstantiated += UpdatePlayerReference;
+        PlayerController.OnPlayerInstantiated += UpdatePlayerReference;
     }
 
     private void OnDestroy()
     {
-   
-        PlayerInstantiated -= UpdatePlayerReference;
+        PlayerController.OnPlayerInstantiated -= UpdatePlayerReference;
     }
 
-    
     private void UpdatePlayerReference(PlayerController player)
     {
         Player = player;
@@ -34,12 +28,20 @@ public class MinaController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             if (Player != null)
             {
-                Player.Life -= Damage;
+                Vector3 minePosition = transform.position;
+                float forceMagnitude = 10f;
+                Player.PushBackForMine(minePosition, forceMagnitude);
+
+                Player.ChangeLife(-Damage);
             }
+            GameObject explosion =  Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            Destroy(explosion, explosionDuration);
+
             Destroy(this.gameObject);
         }
     }

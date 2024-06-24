@@ -12,15 +12,15 @@ public class EnemyPatroller : MonoBehaviour
     private Rigidbody _compRigidbody;
     [SerializeField]private PlayerController player;
     private bool isChasing = false;
-
+    public bool isCooldownActive = false;
     void Start()
     {
         _compRigidbody = GetComponent<Rigidbody>();
-        player = FindAnyObjectByType<PlayerController>();
+        PlayerController.OnPlayerInstantiated += OnPlayerInstantiated;
 
         if (player == null)
         {
-            Debug.LogError("Jugador no encontrado en la escena.");
+            //Debug.LogError("Jugador no encontrado en la escena.");
             return;
         }
 
@@ -32,11 +32,11 @@ public class EnemyPatroller : MonoBehaviour
 
     void Update()
     {
-        if (isChasing)
+        if (isChasing && !isCooldownActive)
         {
             ChasePlayer();
         }
-        else
+        else if(!isCooldownActive)
         {
             Patrol();
         }
@@ -138,8 +138,22 @@ public class EnemyPatroller : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            player.Life = player.Life - enemyData.damage;
+            if(player != null)
+            {
+                player.ChangeLife(-enemyData.damage);
+                Vector3 pushDirection = collision.transform.position - transform.position;
+                player.PushBack(pushDirection.normalized);
+
+                StartCoroutine(AfterCollision());
+            }
+
         }
+    }
+    IEnumerator AfterCollision()
+    {
+        isCooldownActive = true;
+        yield return new WaitForSeconds(1f);
+        isCooldownActive = false;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -155,6 +169,16 @@ public class EnemyPatroller : MonoBehaviour
        
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemyData.detectionRange);
+    }
+    private void OnPlayerInstantiated(PlayerController instantiatedPlayer)
+    {
+        player = instantiatedPlayer;
+        
+    }
+    private void OnDestroy()
+    {
+
+        PlayerController.OnPlayerInstantiated -= OnPlayerInstantiated;
     }
 }
 

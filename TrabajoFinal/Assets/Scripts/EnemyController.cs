@@ -6,20 +6,21 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private PlayerController Player;
     public Enemys enemyData; 
-    public Transform player;
+    public Transform playerTransform;
     private float currentHealth;
     private bool isPlayerInRange;
     private float rotationSpeed = 5.0f;
+    private bool isCooldownActive = false;
     void Start()
     {
 
-        currentHealth = enemyData.health; 
-         Player = FindAnyObjectByType<PlayerController>();
+        currentHealth = enemyData.health;
+        PlayerController.OnPlayerInstantiated += OnPlayerInstantiated;
     }
 
     void Update()
     {
-        if (isPlayerInRange && player != null)
+        if (isPlayerInRange && playerTransform != null)
         {
 
             ChasePlayer(); 
@@ -28,9 +29,12 @@ public class EnemyController : MonoBehaviour
 
     void ChasePlayer()
     {
-        RotatePlayer();
-        Vector3 direction = (player.position - transform.position).normalized;
-        transform.position += direction * enemyData.speed * Time.deltaTime; 
+        if (!isCooldownActive)
+        {
+            RotatePlayer();
+            Vector3 direction = (playerTransform.position - transform.position).normalized;
+            transform.position += direction * enemyData.speed * Time.deltaTime;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -55,7 +59,7 @@ public class EnemyController : MonoBehaviour
     }
     void RotatePlayer()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = playerTransform.position - transform.position;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -73,24 +77,46 @@ public class EnemyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            Player.Life = Player.Life - enemyData.damage;
+            if(playerTransform != null && !isCooldownActive)
+            {
+                Player.ChangeLife(-enemyData.damage);
+                Vector3 pushDirection = collision.transform.position - transform.position; 
+                Player.PushBack(pushDirection.normalized);
+                StartCoroutine(AfterCollision());
+            }
         }
     }
 
+    IEnumerator AfterCollision()
+    {
+        isCooldownActive = true;
+        yield return new WaitForSeconds(0.5f);
+        isCooldownActive = false;
+    }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            player = other.transform;
+            playerTransform = other.transform;
             isPlayerInRange = true; 
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
             isPlayerInRange = false; 
         }
+    }
+    private void OnPlayerInstantiated(PlayerController instantiatedPlayer)
+    {
+        Player = instantiatedPlayer;
+        playerTransform = Player.transform;
+    }
+    private void OnDestroy()
+    {
+       
+        PlayerController.OnPlayerInstantiated -= OnPlayerInstantiated;
     }
 }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -85,7 +86,8 @@ public class MenuSeleccioPersonaje : MonoBehaviour
         {
             currentCharacterModel = Instantiate(newModel, characterDisplayContainer);
             currentCharacterModel.transform.localPosition = Vector3.zero; 
-            currentCharacterModel.transform.localRotation = Quaternion.identity; 
+            currentCharacterModel.transform.localRotation = Quaternion.identity;
+            currentCharacterModel.transform.DORotate(new Vector3(0, 360, 0), 5.0f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
         }
     }
 }

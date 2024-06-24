@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _compRigidbody;
-   public float moveSpeed = 5.0f;
+    public float OriginalSpeed;
+    public float moveSpeed = 5.0f;
     public float rotationSpeed = 120.0f;
     public GameObject[] leftWheels;
     public GameObject[] rightWheels;
@@ -15,14 +17,25 @@ public class PlayerController : MonoBehaviour
     public float wheelRotationSpeed = 200.0f;
     private float moveInput;
     private float rotationInput;
-    [SerializeField] private GameObject explosionPrefab; 
-    [SerializeField] private string gameOverScene = "Derrota"; 
+
+    [SerializeField] private string gameOverScene = "Derrota";
     [SerializeField] private float delayBeforeSceneChange = 2.0f;
+
+
+    public static event Action<PlayerController> OnPlayerInstantiated;
+    public event Action<float> OnLifeChanged;
     void Awake()
     {
-        MinaController.PlayerInstantiated?.Invoke(this);
-        _compRigidbody = GetComponent<Rigidbody>();  
+
+        _compRigidbody = GetComponent<Rigidbody>();
     }
+    private void Start()
+    {
+        OriginalSpeed = moveSpeed;
+        OnPlayerInstantiated?.Invoke(this);
+        // Debug.Log("PlayerController Evento OnPlayerInstantiated invocado");
+    }
+
     void Update()
     {
         RotationWeels(moveInput, rotationInput);
@@ -30,11 +43,12 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(gameOverScene);
         }
+
     }
     void FixedUpdate()
     {
-          MoveTank(moveInput);
-          RotationTank(rotationInput);
+        MoveTank(moveInput);
+        RotationTank(rotationInput);
     }
     void MoveTank(float input)
     {
@@ -51,7 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         float wheelRotation = moveInput * wheelRotationSpeed * Time.deltaTime;
 
-        
+
         for (int i = 0; i < leftWheels.Length; i++)
         {
             if (leftWheels[i] != null)
@@ -60,7 +74,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-     
+
         for (int i = 0; i < rightWheels.Length; i++)
         {
             if (rightWheels[i] != null)
@@ -81,11 +95,33 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
-            Life = Life - 1;
+            Vector3 pushDirection = transform.position - collision.transform.position;
+            PushBack(pushDirection.normalized);
+            ChangeLife(-1);
 
-           
+
         }
-      
     }
-  
+    public void ChangeLife(float amount)
+    {
+        Life = Life + amount;
+        OnLifeChanged?.Invoke(Life);
+    }
+
+    public void PushBack(Vector3 direction)
+    {
+
+        _compRigidbody.DOMove(transform.position + direction * 2f, 0.3f);
+    }
+    public void PushBackForMine(Vector3 minePosition, float forceMagnitude)
+    {
+        Vector3 direction = transform.position - minePosition;
+        direction.y = 0; 
+        direction.Normalize();
+
+   
+        transform.DOMove(transform.position + direction * 2f, 0.3f);
+
+    
+    }
 }
