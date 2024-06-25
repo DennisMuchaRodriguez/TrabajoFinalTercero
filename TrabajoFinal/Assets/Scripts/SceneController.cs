@@ -16,14 +16,20 @@ public class SceneController : MonoBehaviour
     public TextMeshProUGUI playerHealthText;
     public TextMeshProUGUI enemiesRemainingText;
     public TextMeshProUGUI messageTextStart;
+    public TextMeshProUGUI enemiesText;
+    public TextMeshProUGUI playerLifeText;
     private bool isWritingMessage = false;
     public float typingSpeed = 0.05f;
-    
+
+    public GameObject EnemiesImage;
     private void Start()
     {
         
         playerHealthText.gameObject.SetActive(false);
         enemiesRemainingText.gameObject.SetActive(false);
+        EnemiesImage.gameObject.SetActive(false);
+        enemiesText.gameObject.SetActive(false);
+        playerLifeText.gameObject.SetActive(false);
         if (initialCamera != null) 
         {
             initialCamera.Priority = 10;
@@ -35,7 +41,7 @@ public class SceneController : MonoBehaviour
         InvokeRepeating("CheckForEnemies", checkInterval, checkInterval);
         StartCoroutine(FindPlayerCamera());
         StartCoroutine(ShowTextDelay(3f));
-        StartCoroutine(ShowMessageStart(3f, "Bienvenido al juego"));
+        StartCoroutine(ShowMessageStart(3f, "Rescata a los vegetales, elimina a todos los enemigos"));
     }
     private IEnumerator ShowMessageStart(float delay, string message)
     {
@@ -71,6 +77,9 @@ public class SceneController : MonoBehaviour
       
         playerHealthText.gameObject.SetActive(true);
         enemiesRemainingText.gameObject.SetActive(true);
+        EnemiesImage.gameObject.SetActive(true);
+        enemiesText.gameObject.SetActive(true);
+        playerLifeText.gameObject.SetActive(true);
     }
     private void CheckForEnemies()
     {
@@ -78,7 +87,7 @@ public class SceneController : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         int RemainigEnemis = enemies.Length;
 
-        enemiesRemainingText.text = "Enemigos restantes: " + RemainigEnemis;
+        enemiesRemainingText.text = RemainigEnemis.ToString();
 
         if (enemies.Length == 0)
         {
@@ -87,7 +96,7 @@ public class SceneController : MonoBehaviour
         }
 
         Debug.Log("Hay " + enemies.Length);
-        enemiesRemainingText.text = "Enemigos restantes: " + RemainigEnemis;
+        enemiesRemainingText.text = RemainigEnemis.ToString();
     }
     private IEnumerator FindPlayerCamera()
     {
@@ -128,7 +137,7 @@ public class SceneController : MonoBehaviour
     public void UpdatePlayerHealth(float Healht)
     {
         
-        playerHealthText.text = "Vida: " + Healht.ToString();
+        playerHealthText.text = Healht.ToString();
     }
     private void OnDestroy()
     {

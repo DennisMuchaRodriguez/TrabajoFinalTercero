@@ -10,8 +10,8 @@ public class ObjetivoController : MonoBehaviour
     [SerializeField] private PlayerController Player;
     public TextMeshProUGUI promptText;
     public TextMeshProUGUI dialogueText;
-    public string fullMessage = "Ayudanos, para liberarnos tienes que eliminar a todos los enemigos";
-    public string allEnemiesDefeatedMessage = "Gracias por salvarnos de la comida chatarra";
+    public string fullMessage;
+    public string allEnemiesDefeatedMessage;
     public float typingSpeed = 0.05f;
     public GameObject Jaule;
     public SceneController sceneController;
