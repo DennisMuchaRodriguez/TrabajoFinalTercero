@@ -15,4 +15,6 @@ MonoBehaviour:
   Player: {fileID: 3588166899579643580, guid: 1573395473b70ce4db912b75b998fd2f, type: 3}
   PersonajeJugable: {fileID: 8132743717023459765, guid: f6766d9062e37054084c99b103c2322f,
     type: 3}
+  StickerPersonaje: {fileID: 7107674795649703835, guid: eb2f79045c70dbc4b987f14972d86483,
+    type: 3}
   Name: Naranjado

@@ -32,7 +32,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         OriginalSpeed = moveSpeed;
-        OnPlayerInstantiated?.Invoke(this);
+        if (OnPlayerInstantiated != null)
+        {
+            OnPlayerInstantiated(this);
+        }
         // Debug.Log("PlayerController Evento OnPlayerInstantiated invocado");
     }
 
@@ -105,7 +108,11 @@ public class PlayerController : MonoBehaviour
     public void ChangeLife(float amount)
     {
         Life = Life + amount;
-        OnLifeChanged?.Invoke(Life);
+       
+        if (OnLifeChanged != null)
+        {
+            OnLifeChanged(Life);
+        }
     }
 
     public void PushBack(Vector3 direction)

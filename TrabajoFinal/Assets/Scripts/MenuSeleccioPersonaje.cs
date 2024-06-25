@@ -11,11 +11,12 @@ public class MenuSeleccioPersonaje : MonoBehaviour
 {
 
     private int index;
-    [SerializeField] private Transform characterDisplayContainer; 
+    [SerializeField] private Transform characterDisplayContainer;
+    [SerializeField] private Transform stickerDisplayContainer;
     [SerializeField] private TextMeshProUGUI nameText; 
     private GameManager gameManager;
-    private GameObject currentCharacterModel; 
-
+    private GameObject currentCharacterModel;
+    private GameObject currentCharacterSticker;
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -39,6 +40,7 @@ public class MenuSeleccioPersonaje : MonoBehaviour
             
             nameText.text = selectedCharacter.Name;
             UpdateCharacterModel(selectedCharacter.PersonajeJugable);
+            UpdateCharacterSticker(selectedCharacter.StickerPersonaje);
             //Debug.LogError("Se cambio a indice: " + index);
         }
         else
@@ -71,7 +73,10 @@ public class MenuSeleccioPersonaje : MonoBehaviour
         PlayerSelect currentCharacter = gameManager.GetCharacterByIndex(index);
         nameText.text = currentCharacter.Name;
         UpdateCharacterModel(currentCharacter.PersonajeJugable);
+        UpdateCharacterSticker(currentCharacter.StickerPersonaje);
     }
+
+
 
     private void UpdateCharacterModel(GameObject newModel)
     {
@@ -88,6 +93,21 @@ public class MenuSeleccioPersonaje : MonoBehaviour
             currentCharacterModel.transform.localPosition = Vector3.zero; 
             currentCharacterModel.transform.localRotation = Quaternion.identity;
             currentCharacterModel.transform.DORotate(new Vector3(0, 360, 0), 5.0f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+        }
+    }
+
+    private void UpdateCharacterSticker(GameObject newSticker)
+    {
+        if (currentCharacterSticker != null)
+        {
+            Destroy(currentCharacterSticker);
+        }
+
+        if (newSticker != null)
+        {
+            currentCharacterSticker = Instantiate(newSticker, stickerDisplayContainer);
+            currentCharacterSticker.transform.localPosition = Vector3.zero;
+            currentCharacterSticker.transform.localRotation = Quaternion.identity;
         }
     }
 }

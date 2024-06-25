@@ -7,5 +7,6 @@ public class PlayerSelect : ScriptableObject
 {
     public GameObject Player;
     public GameObject PersonajeJugable;
+    public GameObject StickerPersonaje;
     public string Name;
 }
