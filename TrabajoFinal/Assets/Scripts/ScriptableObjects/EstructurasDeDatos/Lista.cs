@@ -22,7 +22,7 @@ public class Lista<T>
             ResizeArray();
         }
         array[length] = item;
-        length++;
+        length = length + 1;
     }
 
     public T Get(int index)
@@ -41,7 +41,7 @@ public class Lista<T>
 
     private void ResizeArray()
     {
-        capacity *= 2;
+        capacity = capacity * 2;
         T[] newArray = new T[capacity];
         for (int i = 0; i < length; i++)
         {

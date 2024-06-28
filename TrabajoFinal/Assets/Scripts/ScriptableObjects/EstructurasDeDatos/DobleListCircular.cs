@@ -72,7 +72,7 @@ public class DoubleCircularList<T>
         }
         else if (position > count || position < 0)
         {
-            throw new IndexOutOfRangeException("Invalid position");
+            throw new IndexOutOfRangeException("Error");
         }
         else
         {
@@ -96,7 +96,7 @@ public class DoubleCircularList<T>
     {
         if (head == null)
         {
-            throw new InvalidOperationException("List is empty");
+            throw new InvalidOperationException("Error");
         }
         else
         {
@@ -129,7 +129,7 @@ public class DoubleCircularList<T>
         }
         else if (position >= count || position < 0)
         {
-            throw new IndexOutOfRangeException("Invalid position");
+            throw new IndexOutOfRangeException("Error");
         }
         else
         {
@@ -146,7 +146,7 @@ public class DoubleCircularList<T>
     {
         if (head == null)
         {
-            throw new InvalidOperationException("List is empty");
+            throw new InvalidOperationException("Error");
         }
         else
         {
@@ -179,7 +179,7 @@ public class DoubleCircularList<T>
         }
         else if (position >= count || position < 0)
         {
-            throw new IndexOutOfRangeException("Invalid position");
+            throw new IndexOutOfRangeException("Error");
         }
         else
         {
@@ -196,7 +196,7 @@ public class DoubleCircularList<T>
     {
         if (head == null)
         {
-            throw new InvalidOperationException("List is empty");
+            throw new InvalidOperationException("Error");
         }
 
         Node oldHead = head;
@@ -222,7 +222,7 @@ public class DoubleCircularList<T>
     {
         if (head == null)
         {
-            throw new InvalidOperationException("List is empty");
+            throw new InvalidOperationException("Error");
         }
 
         Node previousLastNode = head.Previous;
@@ -255,7 +255,7 @@ public class DoubleCircularList<T>
         }
         else if (position >= count || position < 0)
         {
-            throw new IndexOutOfRangeException("Invalid position");
+            throw new IndexOutOfRangeException("Error");
         }
         else
         {
@@ -286,7 +286,7 @@ public class DoubleCircularList<T>
     {
         if (head == null)
         {
-            throw new InvalidOperationException("List is empty");
+            throw new InvalidOperationException("Error");
         }
 
         Node lastNode = head.Previous;

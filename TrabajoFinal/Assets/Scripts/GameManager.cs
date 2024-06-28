@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("El juego ha terminado.");
+      
     }
 
 

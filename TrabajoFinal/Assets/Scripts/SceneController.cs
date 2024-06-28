@@ -41,7 +41,7 @@ public class SceneController : MonoBehaviour
         InvokeRepeating("CheckForEnemies", checkInterval, checkInterval);
         StartCoroutine(FindPlayerCamera());
         StartCoroutine(ShowTextDelay(3f));
-        StartCoroutine(ShowMessageStart(3f, "Rescata a los vegetales, elimina a todos los enemigos"));
+        StartCoroutine(ShowMessageStart(3f, "Rescue us from junk food, you have to eliminate all enemies"));
     }
     private IEnumerator ShowMessageStart(float delay, string message)
     {

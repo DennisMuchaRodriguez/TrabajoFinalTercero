@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchSpeed: 80
   bullet: {fileID: 4049525865806585013, guid: 302fce9ec33667746bdf9d0f028657b7, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 3019621739265290849}
   shootSound: {fileID: 8300000, guid: d73c794fa90bd834096be1c70dda7406, type: 3}
   speedCurve:
     serializedVersion: 2
@@ -836,6 +836,86 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1971142884238871753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4761685580334016326
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6698869359842753765}
+    m_Modifications:
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.2756114
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.994495
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.233286
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688366415875593635, guid: e24e305b9d7596648a48c7d2958f87a0,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioShoot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e24e305b9d7596648a48c7d2958f87a0, type: 3}
+--- !u!82 &3019621739265290849 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7778629390281004327, guid: e24e305b9d7596648a48c7d2958f87a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4761685580334016326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8397324726979374652 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3935492516343515514, guid: e24e305b9d7596648a48c7d2958f87a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4761685580334016326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6592587391424371470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -917,6 +997,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 093d89c0b8dbebb4ba2fc76376eaec74,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8397324726979374652}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 093d89c0b8dbebb4ba2fc76376eaec74,
         type: 3}
       insertIndex: -1
