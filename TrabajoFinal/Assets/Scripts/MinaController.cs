@@ -10,10 +10,16 @@ public class MinaController : MonoBehaviour
     private float Damage;
     public GameObject explosionPrefab;
     public float explosionDuration = 3;
+    public AudioSource audioSource;
+    public AudioClip explosionSound;
     private void Start()
     {
         Damage = minaData.damage;
         PlayerController.OnPlayerInstantiated += UpdatePlayerReference;
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void OnDestroy()
@@ -37,6 +43,10 @@ public class MinaController : MonoBehaviour
                 Player.PushBackForMine(minePosition, forceMagnitude);
 
                 Player.ChangeLife(-Damage);
+            }
+            if (audioSource != null && explosionSound != null)
+            {
+                audioSource.PlayOneShot(explosionSound);
             }
             GameObject explosion =  Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 

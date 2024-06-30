@@ -1,10 +1,9 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuSeleccioPersonaje : MonoBehaviour
@@ -12,9 +11,11 @@ public class MenuSeleccioPersonaje : MonoBehaviour
 
     private int index;
     [SerializeField] private Transform characterDisplayContainer;
-    [SerializeField] private TextMeshProUGUI nameText; 
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Transform CanvasStats;
     private GameManager gameManager;
     private GameObject currentCharacterModel;
+    private GameObject currentCanvasStats;
 
     void Start()
     {
@@ -26,7 +27,10 @@ public class MenuSeleccioPersonaje : MonoBehaviour
             index = 0; 
         }
 
-        UpdateCharacterDisplay(); 
+        UpdateCharacterDisplay();
+      
+
+
     }
 
     private void CambiarPantalla()
@@ -39,8 +43,8 @@ public class MenuSeleccioPersonaje : MonoBehaviour
             
             nameText.text = selectedCharacter.Name;
             UpdateCharacterModel(selectedCharacter.PersonajeJugable);
-      
-            //Debug.LogError("Se cambio a indice: " + index);
+            UpdateCharacterStats(selectedCharacter.CanvasStats);
+         
         }
         else
         {
@@ -72,7 +76,7 @@ public class MenuSeleccioPersonaje : MonoBehaviour
         PlayerSelect currentCharacter = gameManager.GetCharacterByIndex(index);
         nameText.text = currentCharacter.Name;
         UpdateCharacterModel(currentCharacter.PersonajeJugable);
-       
+        UpdateCharacterStats(currentCharacter.CanvasStats);
     }
 
 
@@ -95,5 +99,21 @@ public class MenuSeleccioPersonaje : MonoBehaviour
         }
     }
 
-    
+    private void UpdateCharacterStats(GameObject newCanvasStats)
+    {
+        if (currentCanvasStats != null)
+        {
+            currentCanvasStats.SetActive(false);
+        }
+
+       
+        if (newCanvasStats != null)
+        {
+          
+            currentCanvasStats = Instantiate(newCanvasStats, CanvasStats);
+            currentCanvasStats.transform.localPosition = Vector3.zero;
+            currentCanvasStats.transform.localRotation = Quaternion.identity;
+            currentCanvasStats.SetActive(true);
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
@@ -123,5 +124,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; 
         SceneManager.LoadScene("Menu"); 
     }
+  
 
 }

@@ -22,12 +22,14 @@ public class SceneController : MonoBehaviour
     public float typingSpeed = 0.05f;
 
     public GameObject EnemiesImage;
+    public GameObject LifeImage;
     private void Start()
     {
         
         playerHealthText.gameObject.SetActive(false);
         enemiesRemainingText.gameObject.SetActive(false);
         EnemiesImage.gameObject.SetActive(false);
+        LifeImage.gameObject.SetActive(false);
         enemiesText.gameObject.SetActive(false);
         playerLifeText.gameObject.SetActive(false);
         if (initialCamera != null) 
@@ -78,6 +80,7 @@ public class SceneController : MonoBehaviour
         playerHealthText.gameObject.SetActive(true);
         enemiesRemainingText.gameObject.SetActive(true);
         EnemiesImage.gameObject.SetActive(true);
+        LifeImage.gameObject.SetActive(true);
         enemiesText.gameObject.SetActive(true);
         playerLifeText.gameObject.SetActive(true);
     }
@@ -122,7 +125,7 @@ public class SceneController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No se encontró el objeto jugador o las cámaras no están asignadas");
+            Debug.LogError("No se encontro al Player");
         }
     }
     public bool AreAllEnemisDefeat()

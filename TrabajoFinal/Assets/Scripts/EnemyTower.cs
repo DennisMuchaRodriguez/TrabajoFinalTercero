@@ -13,7 +13,15 @@ public class EnemyTower : MonoBehaviour
     private Transform player;
     private float nextFireTime = 0f;
     private bool isPlayerInRange = false;
-
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    private void Start()
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
     void Update()
     {
         if (isPlayerInRange && player != null)
@@ -41,6 +49,10 @@ public class EnemyTower : MonoBehaviour
         {
             _compRigidbody.AddForce(firePointe.up * bulletForce, ForceMode.Impulse);
         }
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
     public void TakeDamage(float damage)
     {
@@ -50,6 +62,7 @@ public class EnemyTower : MonoBehaviour
             Die();
         }
     }
+
 
     void Die()
     {

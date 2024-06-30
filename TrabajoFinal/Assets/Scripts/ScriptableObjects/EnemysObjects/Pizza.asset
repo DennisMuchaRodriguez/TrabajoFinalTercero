@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 2
   speed: 6
   damage: 2
-  detectionRange: 8.92
+  detectionRange: 12.5

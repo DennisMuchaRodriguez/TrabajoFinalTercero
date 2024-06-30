@@ -11,7 +11,7 @@ public class TextoLoreController : MonoBehaviour
     public Button nextButton;
     public Button previousButton;
     public Button closeButton;
-    public Button openMenuButton; // Nuevo botón para abrir el menú
+    public Button openMenuButton;
     public GameObject menuPanel;
 
     private DoubleList<TextMeshProUGUI> textList;
@@ -21,23 +21,23 @@ public class TextoLoreController : MonoBehaviour
     {
         textList = new DoubleList<TextMeshProUGUI>();
 
-        // Insertar los textos en la lista doble
+       
         textList.InsertNodeAtEnd(text1);
         textList.InsertNodeAtEnd(text2);
         textList.InsertNodeAtEnd(text3);
 
         currentPosition = 0;
 
-        // Inicializar la visualización
+       
         UpdateTextDisplay();
 
-        // Asignar los listeners a los botones
+       
         nextButton.onClick.AddListener(NextText);
         previousButton.onClick.AddListener(PreviousText);
         closeButton.onClick.AddListener(CloseMenu);
-        openMenuButton.onClick.AddListener(OpenMenu); // Asignar el listener para abrir el menú
+        openMenuButton.onClick.AddListener(OpenMenu);
 
-        // Ocultar el panel del menú al inicio
+      
         menuPanel.SetActive(false);
     }
 
@@ -55,14 +55,14 @@ public class TextoLoreController : MonoBehaviour
 
     private void UpdateTextDisplay()
     {
-        // Mostrar solo el texto actual y ocultar los demás
+        
         for (int i = 0; i < textList.Count; i++)
         {
             var text = textList.GetNodeAtPosition(i);
             text.gameObject.SetActive(i == currentPosition);
         }
 
-        // Controlar la visibilidad de los botones Siguiente y Anterior
+    
         nextButton.gameObject.SetActive(currentPosition < textList.Count - 1);
         previousButton.gameObject.SetActive(currentPosition > 0);
     }

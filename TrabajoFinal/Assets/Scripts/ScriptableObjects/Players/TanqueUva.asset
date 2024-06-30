@@ -15,6 +15,6 @@ MonoBehaviour:
   Player: {fileID: 6198516186759689418, guid: c009ecfd55b184f4bba0372d157003ff, type: 3}
   PersonajeJugable: {fileID: 8258002995930377318, guid: 73406a621e077bb4aad6426056c364d9,
     type: 3}
-  StickerPersonaje: {fileID: 3744004866805062030, guid: 57f9b704a0da97a4ab69391c2d7ec035,
+  CanvasStats: {fileID: 9097474829863374562, guid: b4d57671422dd0b4bb7083d8ab645cc6,
     type: 3}
   Name: Uve

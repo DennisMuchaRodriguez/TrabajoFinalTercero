@@ -48,7 +48,7 @@ public class EnemyPatroller : MonoBehaviour
     {
         if (nodes == null || nodes.Length == 0)
         {
-            Debug.LogError("Nodes no está inicializado o está vacío.");
+            Debug.LogError("Nodes no encontrados");
             return;
         }
 

@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     public float wheelRotationSpeed = 200.0f;
     private float moveInput;
     private float rotationInput;
-
+    public AudioSource audioSource;
+    public AudioClip damageSound;
     [SerializeField] private string gameOverScene = "Derrota";
     [SerializeField] private float delayBeforeSceneChange = 2.0f;
-
+    private bool isInTrigger = false; 
+    public float reducedPushBackFactor = 0.5f;
 
     public static event Action<PlayerController> OnPlayerInstantiated;
     public event Action<float> OnLifeChanged;
@@ -36,7 +38,11 @@ public class PlayerController : MonoBehaviour
         {
             OnPlayerInstantiated(this);
         }
-        // Debug.Log("PlayerController Evento OnPlayerInstantiated invocado");
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        
     }
 
     void Update()
@@ -113,12 +119,29 @@ public class PlayerController : MonoBehaviour
         {
             OnLifeChanged(Life);
         }
+        if (amount < 0 && audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
     }
-
+    public IEnumerator ApplySpeedBoostCoroutine(float multiplier, float duration)
+    {
+        moveSpeed *= multiplier;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = OriginalSpeed;
+    }
     public void PushBack(Vector3 direction)
     {
 
-        _compRigidbody.DOMove(transform.position + direction * 2f, 0.3f);
+        float pushBackDistance = 2.5f;
+
+    
+        if (isInTrigger)
+        {
+            pushBackDistance *= reducedPushBackFactor;
+        }
+
+        _compRigidbody.DOMove(transform.position + direction * pushBackDistance, 0.3f);
     }
     public void PushBackForMine(Vector3 minePosition, float forceMagnitude)
     {
@@ -130,5 +153,20 @@ public class PlayerController : MonoBehaviour
         transform.DOMove(transform.position + direction * 2f, 0.3f);
 
     
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PushBackReducer"))
+        {
+            isInTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("PushBackReducer")) 
+        {
+            isInTrigger = false;
+        }
     }
 }

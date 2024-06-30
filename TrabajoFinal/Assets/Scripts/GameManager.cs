@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        //Arreglar dobleLista
+        
         personajes.InsertNodeAtStart(Player1);
         personajes.InsertNodeAtStart(Player2);
         personajes.InsertNodeAtStart(Player3);
